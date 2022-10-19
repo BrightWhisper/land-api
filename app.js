@@ -1,15 +1,14 @@
-const Koa = require('koa')
-const axios = require('axios')
-const Router = require('koa-router')
+const Koa = require("koa")
+const axios = require("axios")
+
+const classic = require('./api/v1/classic')
+const book = require('./api/v1/book')
 
 const app = new Koa()
-const router = new Router()
 
 
-router.get('/classic/latest', (ctx, next) => {
-    ctx.body = { key: 'classic' }
-})
 
-app.use(router.routes())
+app.use(classic.routes())
+app.use(book.routes())
 
 app.listen(9996)

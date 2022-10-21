@@ -1,14 +1,15 @@
 const Koa = require("koa")
+const parser = require('koa-bodyparser')
 const axios = require("axios")
-
-const classic = require('./api/v1/classic')
-const book = require('./api/v1/book')
+const InitManager = require('./core/init')
+const catchError = require('./middlewares/exception')
 
 const app = new Koa()
+app.use(catchError)
+app.use(parser())
+
+InitManager.initCore(app)
 
 
-
-app.use(classic.routes())
-app.use(book.routes())
 
 app.listen(9996)

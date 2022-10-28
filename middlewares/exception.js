@@ -10,6 +10,14 @@ const catchError = async (ctx, next) => {
         requestUrl: `${ctx.method} ${ctx.path}`,
       }
       ctx.status = error.code
+    } else {
+      // 未知异常
+      ctx.body = {
+        msg: 'unknown error',
+        errorCode: 999,
+        requestUrl: `${ctx.method} ${ctx.path}`,
+      }
+      ctx.status = 500
     }
   }
 }
